@@ -1,4 +1,4 @@
-name: flutter_github_search
+name: top_flutter_repos
 description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
@@ -31,9 +31,21 @@ dependencies:
     sdk: flutter
 
 
+  http: ^0.13.0
+  equatable: ^2.0.3
+  stream_transform: ^2.0.0
+
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
+  flutter_polygon: ^0.3.0+2
+  cached_network_image: ^3.2.0
+  flutter_bloc: ^8.0.1
+  connectivity_plus: ^2.3.4
+  path_provider: ^2.0.11
+  hive: ^2.2.2
+  carousel_slider: ^4.1.1
+  html: ^0.15.0
 
 dev_dependencies:
   flutter_test:
