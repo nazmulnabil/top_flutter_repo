@@ -33,13 +33,16 @@ class GithubSearchBloc extends Bloc<GithubSearchEvent, GithubSearchState> {
       Emitter<GithubSearchState> emit,
       ) async {
     final searchTerm = event.text;
+    print(searchTerm);
 
     if (searchTerm.isEmpty) return emit(SearchStateEmpty());
 
     emit(SearchStateLoading());
 
     try {
-      final results = await getTopFlutterRepos.fetchTopFlutterRepos();
+      final results = await getTopFlutterRepos.fetchTopFlutterRepos(term: searchTerm);
+      print('inside bloc after api calling ');
+      print('inside bloc after api calling result/////////////// $results');
       emit(SearchStateSuccess(results));
     } catch (error) {
       emit(error is SearchStateError

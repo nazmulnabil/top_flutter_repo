@@ -39,9 +39,10 @@ class _SearchProductListItemState extends State<SearchProductListItem> {
 
     return  ListTile(
       leading: CircleAvatar(
-        child: Image.network(widget.item.owner.avatarUrl),
+        child: Image.network(widget.item.owner!.avatarUrl.toString()),
       ),
-      title: Text(widget.item.fullName),
+      trailing:Text(widget.item.stargazersCount.toString()),
+      title: Text(widget.item.fullName.toString()),
       onTap: () async {
 
 

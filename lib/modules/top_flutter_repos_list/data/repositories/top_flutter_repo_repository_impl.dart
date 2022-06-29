@@ -16,7 +16,10 @@ class TopFlutterRepoRepositoryImpl extends ITopFlutterRepoRepository{
   @override
   Future<List<FlutterRepositoryModel>> searchTopFlutterRepos({String? term}) async{
     // TODO: implement search
+    print('inside repo after api term  $term');
     final result = await _flutterRepoRemoteDataSource.getTopFlutterRepos(query: term.toString(),);
+      print('inside repo after api calling ');
+      print('inside repo after api term  $term');
 
     return result;
   }

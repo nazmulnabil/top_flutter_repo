@@ -38,6 +38,7 @@ class _SearchProductListState extends State<SearchProductList> {
         itemCount:widget.len,
 
         itemBuilder: (BuildContext ctx, index) {
+          print('itemsssssssssssssssssss>>>>>>>>>>>>>>>>>>>>> ${widget.items[index].name}');
           return SearchProductListItem(item: widget.items[index], index: index,);
 
 

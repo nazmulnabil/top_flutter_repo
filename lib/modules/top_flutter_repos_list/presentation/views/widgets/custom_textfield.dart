@@ -62,7 +62,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
               hintStyle: const TextStyle(color: AppColors.hintTextColor,
                   fontWeight: FontWeight.w500,
                   fontSize: 12),
-              hintText: "কাঙ্ক্ষিত পণ্যটি খুঁজুন",
+            //  hintText: "কাঙ্ক্ষিত পণ্যটি খুঁজুন",
               fillColor: AppColors.colorWhite),
 
         ),

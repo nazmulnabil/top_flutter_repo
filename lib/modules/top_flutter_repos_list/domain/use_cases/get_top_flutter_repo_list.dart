@@ -7,8 +7,10 @@ class GetTopFlutterRepos {
 
   GetTopFlutterRepos({required this.flutterRepoRepository});
 
-  Future<List<FlutterRepositoryModel>> fetchTopFlutterRepos({String? term}) async{
+  Future<List<FlutterRepositoryModel>> fetchTopFlutterRepos({required String? term}) async{
     // TODO: implement search
+    print('inside use case  ');
+    print('inside repo after api term  $term');
      return  await flutterRepoRepository.searchTopFlutterRepos(term: term.toString() );
   }
 }
