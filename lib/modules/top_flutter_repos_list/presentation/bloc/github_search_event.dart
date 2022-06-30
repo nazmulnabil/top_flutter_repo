@@ -17,3 +17,14 @@ class TextChanged extends GithubSearchEvent {
   @override
   String toString() => 'TextChanged { text: $text }';
 }
+
+class SortedList extends GithubSearchEvent {
+  const SortedList( {required this.text});
+  final String text;
+
+  @override
+  List<Object> get props => [text];
+
+  @override
+  String toString() => 'list shorted { shorted list: $text }';
+}

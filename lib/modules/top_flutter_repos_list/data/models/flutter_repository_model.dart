@@ -162,7 +162,7 @@ class FlutterRepositoryModel {
   }
 
   FlutterRepositoryModel.fromJson(dynamic json) {
-    _id = json['id'];
+    _id = json!['id'] as int;
     _nodeId = json['node_id'];
     _name = json['name'];
     _fullName = json['full_name'];

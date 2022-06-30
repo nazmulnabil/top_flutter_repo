@@ -56,7 +56,7 @@ class FlutterRepoRemoteDataSourceImpl implements FlutterRepoRemoteDataSource{
 
     List<FlutterRepositoryModel> repoList=  <FlutterRepositoryModel>[];
 
-    repoList= cachedJson.map<FlutterRepositoryModel>((dynamic product) =>
+        repoList= cachedJson.map<FlutterRepositoryModel>((dynamic product) =>
         FlutterRepositoryModel.fromJson(product)).toList() as List<FlutterRepositoryModel>;
 
     if (kDebugMode) {
