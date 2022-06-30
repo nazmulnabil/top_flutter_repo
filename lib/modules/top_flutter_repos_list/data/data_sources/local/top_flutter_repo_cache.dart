@@ -1,6 +1,6 @@
 abstract class TopFlutterRepoCache{
 
-    get();
-    set({required String apiResponse});
+    get({required String key});
+    set({required  String key,required String apiResponse});
 
 }

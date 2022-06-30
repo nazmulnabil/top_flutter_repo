@@ -4,18 +4,22 @@ import 'package:top_flutter_repos/modules/top_flutter_repos_list/data/data_sourc
 class TopFlutterRepoCacheImpl extends TopFlutterRepoCache{
   final box= Hive.box('cacheResponse');
 
-  @override
-  get() async{
-    // TODO: implement get
-    return await Hive.box('cacheResponse').get('cacheResponse', defaultValue: []);
 
+
+
+
+  @override
+  get({required String key})async {
+    // TODO: implement get
+    print('inside get method');
+    return await box.get(key.toString());
   }
 
   @override
-  set({required String apiResponse}) async{
+  set({required String key, required String apiResponse}) async{
     // TODO: implement set
-    await Hive.box('cacheResponse').clear();
-    await Hive.box('cacheResponse').put('cacheResponse',apiResponse);
+    print('inside save method');
+    return await box.put(key.toString(),apiResponse);
   }
 
 }
