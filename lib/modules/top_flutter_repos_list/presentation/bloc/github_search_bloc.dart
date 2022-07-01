@@ -56,7 +56,11 @@ class GithubSearchBloc extends Bloc<GithubSearchEvent, GithubSearchState> {
     try {
 
       final results = await getTopFlutterRepos.fetchTopFlutterRepos(term: searchTerm);
+      isSorted=false;
+
       currentList=results;
+
+
       if (kDebugMode) {
         print('inside bloc after api calling result/////////////// $results');
       }
@@ -107,6 +111,7 @@ class GithubSearchBloc extends Bloc<GithubSearchEvent, GithubSearchState> {
     try {
 
       final results = await getTopFlutterRepos.fetchTopFlutterRepos(term: onRefreshTerm);
+      isSorted=false;
       currentList=[...results];
       if (kDebugMode) {
         print('inside bloc after api calling result/////////////// $results');
