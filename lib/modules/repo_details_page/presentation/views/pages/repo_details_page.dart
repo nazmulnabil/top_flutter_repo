@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:top_flutter_repos/core/app_colors.dart';
 import 'package:top_flutter_repos/modules/top_flutter_repos_list/data/models/flutter_repository_model.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 class RepoDetailsPage extends StatelessWidget {
@@ -14,6 +15,9 @@ class RepoDetailsPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Repository User Details'),
         centerTitle: true,
+        backgroundColor: Colors.lightBlue,
+
+
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -54,8 +58,6 @@ class RepoDetailsPage extends StatelessWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
                   children: [
-
-                    const SizedBox(height: 10,),
                     Row(
                       children: [
                         const Text("name:",
@@ -72,7 +74,7 @@ class RepoDetailsPage extends StatelessWidget {
                           ),),
                       ],
                     ),
-                    const SizedBox(height: 10,),
+                    const SizedBox(height: 5,),
                     Column(crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const Text("descripton:",
@@ -89,7 +91,7 @@ class RepoDetailsPage extends StatelessWidget {
                           ),),
                       ],
                     ),
-                    const SizedBox(height: 10,),
+                    const SizedBox(height: 5,),
                     Row(
                       children: [
                         const Text("updated at:",
@@ -108,7 +110,7 @@ class RepoDetailsPage extends StatelessWidget {
                       ],
                     ),
 
-                    const SizedBox(height: 10,),
+                    const SizedBox(height: 5,),
                     Row(
                       children: [
                         const Text("Total stars:",
@@ -128,7 +130,7 @@ class RepoDetailsPage extends StatelessWidget {
 
                       ],
                     ),
-                    const SizedBox(height: 10,),
+                    const SizedBox(height: 5,),
                     Row(
                       children: [
                         const Text("Url:",

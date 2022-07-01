@@ -22,6 +22,7 @@ class _TopFlutterRepoPageState extends State<TopFlutterRepoPage> {
   @override
   void initState() {
     super.initState();
+    //api refresh calling
     timer = Timer.periodic(const Duration(seconds: 1800), (Timer t)
     =>context.read<GithubSearchBloc>().add(const OnRefreshApi()));
   }
@@ -29,17 +30,21 @@ class _TopFlutterRepoPageState extends State<TopFlutterRepoPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: AppColors.pageBackground,
+      color: Colors.lightBlue,
       child: SafeArea(
         child: Scaffold(
+          appBar: AppBar(
+            title: const Text('Github Search'),
+            centerTitle: true,
+            backgroundColor: Colors.lightBlue,
+
+
+          ),
           backgroundColor: AppColors.pageBackground,
           body: Column(
             children:  [
 
                const SizedBox(height: 20,),
-
-
-/// sorting button ///
 
           const SizedBox(height:20,),
               //Textield
@@ -84,8 +89,6 @@ class _SearchBody extends StatelessWidget {
                  style: TextButton.styleFrom(onSurface: AppColors.lightGreyColor),
                  onPressed: () { context.read<GithubSearchBloc>().isSorted=!(context.read<GithubSearchBloc>().isSorted);
                  context.read<GithubSearchBloc>().add(SortedList(text: context.read<GithubSearchBloc>().keyword));
-
-
                  },
                  child:
                  Container(
@@ -101,13 +104,13 @@ class _SearchBody extends StatelessWidget {
                    child: Row(mainAxisAlignment: MainAxisAlignment.center,
                      children: [
                        Text(context.read<GithubSearchBloc>().isSorted?'Default':'Sort by DateTime',
-                         style: TextStyle(
+                         style: const TextStyle(
                              color: AppColors.colorWhite
                          ),),
 
-                       SizedBox(width: 5,),
+                       const SizedBox(width: 5,),
 
-                       Icon( Icons.sort,
+                       const Icon( Icons.sort,
                          color: AppColors.colorWhite,
                        size: 17,)
                      ],
