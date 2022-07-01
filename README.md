@@ -1,8 +1,8 @@
 # flutter_github_search
 
 
-### App architecture pattern -> MVVM
-<Model View ViewModel> ...
+### App architecture pattern -> MVVM [Model View ViewModel]
+ 
 [Model:Holds backend logic,
  View:The user interface where all the visible views and animations are housed.
  This is the layer where users interacts with app like giving user input in this case.
