@@ -25,7 +25,7 @@ The app is mainly architected into three layers..
 
 3.Presentation layer (Bloc,views)
 
-Dependency flow---------->>>>>>>>>>>>
+### Dependency flow---------->>>>>>>>>>>>
 
 Remote data source--> Local data source--> repositories--> Use cases --> Bloc --> UI  
 
