@@ -39,15 +39,15 @@ class FlutterRepoRemoteDataSourceImpl implements FlutterRepoRemoteDataSource{
         dynamic jsonResponse = json.decode(utf8.decode(response.bodyBytes));
 
 
-     // await  topFlutterRepoCache.set( key: query.toString(),apiResponse: jsonResponse["items"],);
-      await box.put(query, jsonResponse['items']);
+     await  topFlutterRepoCache.set( key: query.toString(),apiResponse: jsonResponse["items"],);
+     // await box.put(query, jsonResponse['items']);
       }
     } catch (e) {
       print('Exception!!!!!!!!!!!!!!!!!!!!!!!!  ${e.toString()}');
     }
     ///
-   // var cachedJson = await topFlutterRepoCache.get(key: query.toString());
-    var cachedJson = await box.get(query);
+    var cachedJson = await topFlutterRepoCache.get(key: query.toString());
+    //var cachedJson = await box.get(query);
 
     if (kDebugMode) {
       print("inside remote impl >>>>> cachrd json >>>>>>>>>>>>>>>>> $cachedJson");
