@@ -15,23 +15,7 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return
-      // MultiBlocProvider(
-      //
-      //   providers: [
-      //     BlocProvider(
-      //       create: (_) => SearchProductBloc(
-      //           searchProductRepository: searchProductRepository),
-      //     ),
-      //     BlocProvider(
-      //       create: (_) => CartBloc(
-      //         shoppingRepository: shoppingRepository,
-      //       )..add(CartStarted()),
-      //     )
-      //   ],
-      //   child: const SearchProductPage(),
-      // ),
-      MultiBlocProvider(
+    return MultiBlocProvider(
 
         providers: [
           BlocProvider(
@@ -40,9 +24,14 @@ class App extends StatelessWidget {
           ),
 
         ],
-        child: const MaterialApp(
-          debugShowCheckedModeBanner: false,
-           home: TopFlutterRepoPage(),
+        child: GestureDetector(
+          onTap: () {
+            FocusManager.instance.primaryFocus?.unfocus();
+          },
+          child: const MaterialApp(
+            debugShowCheckedModeBanner: false,
+             home: TopFlutterRepoPage(),
+          ),
         ),
       )
    ;

@@ -10,6 +10,7 @@ class RepoDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       appBar: AppBar(
         title: const Text('Repository User Details'),
         centerTitle: true,

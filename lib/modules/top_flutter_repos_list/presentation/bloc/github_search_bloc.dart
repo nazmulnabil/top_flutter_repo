@@ -26,19 +26,22 @@ EventTransformer<Event> debounce<Event>(Duration duration) {
 
 class GithubSearchBloc extends Bloc<GithubSearchEvent, GithubSearchState> {
 
-
-  GithubSearchBloc({required this.getTopFlutterRepos})
-      : super(SearchStateEmpty()) {
-    on<TextChanged>(_onTextChanged, transformer: debounce(_duration));
-    on<SortedList>(_onSortedList, transformer: debounce(_duration));
-  }
   String keyword='';
   final GetTopFlutterRepos getTopFlutterRepos;
   var shortedList=<FlutterRepositoryModel>[];
   var shortedListfromSession=<FlutterRepositoryModel>[];
   bool isSorted=false;
-
   var currentList=<FlutterRepositoryModel>[];
+
+
+
+  GithubSearchBloc({required this.getTopFlutterRepos})
+      : super(SearchStateEmpty()) {
+    on<TextChanged>(_onTextChanged, transformer: debounce(_duration));
+    on<OnRefreshApi>(_onRefreshApi, transformer: debounce(_duration));
+    on<SortedList>(_onSortedList, transformer: debounce(_duration));
+  }
+
 
 
   void _onTextChanged(
@@ -56,7 +59,7 @@ class GithubSearchBloc extends Bloc<GithubSearchEvent, GithubSearchState> {
     try {
 
       final results = await getTopFlutterRepos.fetchTopFlutterRepos(term: searchTerm);
-      currentList=[...results];
+      currentList=results;
       if (kDebugMode) {
         print('inside bloc after api calling result/////////////// $results');
       }
@@ -64,21 +67,10 @@ class GithubSearchBloc extends Bloc<GithubSearchEvent, GithubSearchState> {
       shortedList.clear();
       shortedList=[...results];
       shortedList.sort((a, b) => a.updatedAt.toString().compareTo(b.updatedAt.toString()));
-      List<String> sortedListToJson = shortedList.map((repo) => jsonEncode(repo.toJson())).toList();
-
-
-
-
-
-
-     // await sharedPreferences.setStringList(searchTerm, sortedListToJson);
-   // await sessionManager.set(searchTerm, shortedList);
-
 
      if (kDebugMode) {
        print('shorted list name>>>>>>>>>>>> ${shortedList.map((e) => e.name)}');
      }
-     //print('json Tags>>>>>>>>>>>> $sortedListToJson)}');
 
       emit(SearchStateSuccess(results));
     } catch (error) {
@@ -88,27 +80,49 @@ class GithubSearchBloc extends Bloc<GithubSearchEvent, GithubSearchState> {
     }
   }
 
-
-
   void _onSortedList(
       SortedList event,
       Emitter<GithubSearchState> emit,
       ) async {
-   //  SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-   // // var sessionJson=await sessionManager.get(event.text);
-   //  var sessionJson=await sharedPreferences.getStringList(event.text);
-   //
-   //  List<FlutterRepositoryModel> sortedSessionrepoList=  <FlutterRepositoryModel>[];
-   //
-   //  sortedSessionrepoList=  sessionJson!.map<FlutterRepositoryModel>((dynamic product) =>
-   //      FlutterRepositoryModel.fromJson(product)).toList() ;
-   //
-   //  print("retrieve shared pref data >>>>>>>>>>>>>>>>>>> $sortedSessionrepoList");
+   // emit(SearchStateLoading());
+    try {
+      emit(SearchStateSuccess(isSorted?shortedList:currentList));
+    } catch (error) {
+      emit(error is SearchStateError
+          ? SearchStateError(error.error)
+          : SearchStateError('something went wrong'));
+    }
+  }
+
+  void _onRefreshApi(
+      OnRefreshApi event,
+      Emitter<GithubSearchState> emit,
+      ) async {
+    final onRefreshTerm =keyword;
+    print(onRefreshTerm);
+
+    if (onRefreshTerm.isEmpty) return emit(SearchStateEmpty());
 
     emit(SearchStateLoading());
+
     try {
 
-      emit(SearchStateSuccess(isSorted?shortedList:shortedList));
+      final results = await getTopFlutterRepos.fetchTopFlutterRepos(term: onRefreshTerm);
+      currentList=[...results];
+      if (kDebugMode) {
+        print('inside bloc after api calling result/////////////// $results');
+      }
+      keyword=onRefreshTerm;
+      shortedList.clear();
+      shortedList=[...results];
+      shortedList.sort((a, b) => a.updatedAt.toString().compareTo(b.updatedAt.toString()));
+
+      if (kDebugMode) {
+        print('shorted list name>>>>>>>>>>>> ${shortedList.map((e) => e.name)}');
+      }
+      //print('json Tags>>>>>>>>>>>> $sortedListToJson)}');
+
+      emit(SearchStateSuccess(results));
     } catch (error) {
       emit(error is SearchStateError
           ? SearchStateError(error.error)

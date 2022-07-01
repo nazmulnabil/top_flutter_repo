@@ -20,22 +20,57 @@ class SearchProductListItem extends StatelessWidget {
     final width=MediaQuery.of(context).size.width;
 
     return  Container(
-      margin: EdgeInsets.symmetric(horizontal: 15,vertical: 5),
+      margin: EdgeInsets.only(left: 15,bottom: 5,top: 5),
       decoration: BoxDecoration(
         color: AppColors.colorWhite,
+        borderRadius: BorderRadius.only(
+          topRight: Radius.circular(20),
+          bottomLeft: Radius.circular(20),
+        ),
         //border: BorderRadius(),
       ),
 
+
+      //item.owner!.avatarUrl.toString()
       child: ListTile(
         leading: CircleAvatar(
-          child: Image.network(item.owner!.avatarUrl.toString()),
+          //radius: ,
+          child: CachedNetworkImage(
+            imageUrl: item.owner!.avatarUrl.toString(),
+            imageBuilder: (context, imageProvider) => Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: imageProvider,
+                  fit: BoxFit.fill,
+                  // colorFilter: const ColorFilter.mode(Colors.white, BlendMode.colorBurn)
+                ),
+              ),
+            ),
+            placeholder:(context, url) =>  const Center(child: CircularProgressIndicator()),
+            errorWidget: (context, url, error) =>  const Icon(Icons.error),
+          ),
         ),
-        trailing:Text(item.stargazersCount.toString()),
+        trailing:Container(
+          width:70,
+          child: Row(
+            mainAxisAlignment:MainAxisAlignment.center,
+            children: [
+
+              Icon(Icons.star,size: 18,
+              color: Colors.amber,),
+              Text(item.stargazersCount.toString(),
+              style: TextStyle(
+                fontSize:14
+              ),),
+
+            ],
+          ),
+        ),
         title: Text(item.fullName.toString()),
         subtitle: Text('updated at '+DateFormat('MM-dd-yy hh:ss').format(DateTime.parse(item.updatedAt.toString()))),
         onTap: () async {
           Navigator.push(context, MaterialPageRoute(builder: (context) =>  RepoDetailsPage(repositoryModel: item,)));
-         
+
         },
       ),
     );

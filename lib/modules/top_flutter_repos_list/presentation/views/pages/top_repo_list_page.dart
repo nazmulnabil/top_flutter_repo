@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,63 +8,45 @@ import 'package:top_flutter_repos/modules/top_flutter_repos_list/presentation/vi
 import '../../../../../core/app_colors.dart';
 import '../widgets/custom_textfield.dart';
 
-class TopFlutterRepoPage extends StatelessWidget {
+class TopFlutterRepoPage extends StatefulWidget {
   const TopFlutterRepoPage({Key? key}) : super(key: key);
 
   @override
+  State<TopFlutterRepoPage> createState() => _TopFlutterRepoPageState();
+}
+
+class _TopFlutterRepoPageState extends State<TopFlutterRepoPage> {
+
+  Timer? timer;
+
+  @override
+  void initState() {
+    super.initState();
+    timer = Timer.periodic(const Duration(seconds: 1800), (Timer t)
+    =>context.read<GithubSearchBloc>().add(const OnRefreshApi()));
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: AppColors.pageBackground,
-        body: Column(
-          children:  [
+    return Container(
+      color: AppColors.pageBackground,
+      child: SafeArea(
+        child: Scaffold(
+          backgroundColor: AppColors.pageBackground,
+          body: Column(
+            children:  [
 
-             const SizedBox(height: 20,),
-
-
-
-        TextButton(
-          style: TextButton.styleFrom(onSurface: AppColors.lightGreyColor),
-          onPressed: () { context.read<GithubSearchBloc>().isSorted=!(context.read<GithubSearchBloc>().isSorted);
-          context.read<GithubSearchBloc>().add(SortedList(text: context.read<GithubSearchBloc>().keyword));
+               const SizedBox(height: 20,),
 
 
-            },
-          child:
-     Container(
-       padding: EdgeInsets.all(5),
-            height: 30,
+/// sorting button ///
 
-            //margin: EdgeInsets.symmetric(horizontal: 4.0),
-            decoration: const BoxDecoration(
-                color:AppColors.colorPrimary ,
-                // border: Border.all(
-                //   color: Colors.red,
-                // ),
-                borderRadius: BorderRadius.all(Radius.circular(5))
-            ),
-            child:Container(
-              width: MediaQuery.of(context).size.width/3,
-              child: Row(mainAxisAlignment: MainAxisAlignment.center,
-                children:const [
-                  Text('Sort by date ',
-                  style: TextStyle(
-                    color: AppColors.colorWhite
-                  ),),
-
-                  Icon( Icons.sort,
-                  color: AppColors.colorWhite,)
-                ],
-              ),
-            )
-          )
-
-        ),
-        const SizedBox(height:20,),
-            //Textield
-             CustomTextField(),
-            _SearchBody(),
-          ],
+          const SizedBox(height:20,),
+              //Textield
+               CustomTextField(),
+              _SearchBody(),
+            ],
+          ),
         ),
       ),
     );
@@ -89,9 +73,51 @@ class _SearchBody extends StatelessWidget {
            print('length>>>>> $length');
          }
 
-          return state.items.isEmpty
-              ? const Text('No Results')
-              : Expanded(child: SearchProductList(items:state.items,len:length));
+         return state.items.isEmpty
+             ? const Text('No Results')
+             : 
+         Expanded(
+             child: Column(
+           children: [
+
+             TextButton(
+                 style: TextButton.styleFrom(onSurface: AppColors.lightGreyColor),
+                 onPressed: () { context.read<GithubSearchBloc>().isSorted=!(context.read<GithubSearchBloc>().isSorted);
+                 context.read<GithubSearchBloc>().add(SortedList(text: context.read<GithubSearchBloc>().keyword));
+
+
+                 },
+                 child:
+                 Container(
+                   height: 40,
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(20),
+                        bottomRight: Radius.circular(20),
+                      ),
+                      color:Colors.lightBlue
+                    ),
+                   width: MediaQuery.of(context).size.width/2,
+                   child: Row(mainAxisAlignment: MainAxisAlignment.center,
+                     children: [
+                       Text(context.read<GithubSearchBloc>().isSorted?'Default':'Sort by DateTime',
+                         style: TextStyle(
+                             color: AppColors.colorWhite
+                         ),),
+
+                       SizedBox(width: 5,),
+
+                       Icon( Icons.sort,
+                         color: AppColors.colorWhite,
+                       size: 17,)
+                     ],
+                   ),
+                 )
+
+             ),
+             Expanded(child: SearchProductList(items:state.items,len:length))
+           ],
+         ));
         }
         return const Text('Please enter a term to begin');
       },

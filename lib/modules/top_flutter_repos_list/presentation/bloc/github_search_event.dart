@@ -28,3 +28,12 @@ class SortedList extends GithubSearchEvent {
   @override
   String toString() => 'list shorted { shorted list: $text }';
 }
+
+class OnRefreshApi extends GithubSearchEvent {
+  const OnRefreshApi();
+  @override
+  List<Object> get props => [];
+
+  @override
+  String toString() => 'TextChanged { text:  }';
+}
