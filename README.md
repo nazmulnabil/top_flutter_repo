@@ -1,9 +1,9 @@
 # flutter_github_search
 
 
-App architecture pattern -> MVVM <Model View ViewModel> ...
+### App architecture pattern -> ###MVVM <Model View ViewModel> ...
 [Model:Holds backend logic,
- View:The user interface where all the visivle views and animations are housed.
+ View:The user interface where all the visible views and animations are housed.
  This is the layer where users interacts with app like giving user input in this case.
  Viewmodel: It is the ui adapter/controller whic sits in between other two.
  In our case bloc plays the role as viewmodel. 
@@ -58,7 +58,7 @@ last updated DateTime.
 If user presses any of the repository list item...It will take him to corresponding repository details page where is 
 able to see the information of repository owner and repository details.
 
-<<<<<<<<<<<<< DEpendency injection>>>>>>>>>>>>>>>>>
+<<<<<<<<<<<<< ###Dependency injection>###>>>>>>>>>>>>>>>>
 
 In stead of making the classes construct their dependencies directly I've used the <<<<<< service locator >>>>>>>>> design pattern 
 where all the dependencies are registered in a centralized place in a method before the app starts.More specifically the method inside
