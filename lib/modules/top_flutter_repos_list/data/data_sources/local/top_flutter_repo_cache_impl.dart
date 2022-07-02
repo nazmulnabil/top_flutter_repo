@@ -21,7 +21,7 @@ class TopFlutterRepoCacheImpl extends TopFlutterRepoCache{
     // TODO: implement set
     print('inside save method');
     final box= Hive.box('cacheResponse');
-    return await box.put(key.toString(),apiResponse);
+    return await box.put(key,apiResponse);
   }
 
 }

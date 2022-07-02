@@ -38,9 +38,9 @@ class FlutterRepoRemoteDataSourceImpl implements FlutterRepoRemoteDataSource{
 
         dynamic jsonResponse = json.decode(utf8.decode(response.bodyBytes));
 
-
-     await  topFlutterRepoCache.set( key: query.toString(),apiResponse: jsonResponse["items"],);
-     // await box.put(query, jsonResponse['items']);
+ print('json response>>>>>>>>>>>>>>>>>>>>>>>$jsonResponse');
+    // await  topFlutterRepoCache.set( key: query.toString(),apiResponse: jsonResponse["items"],);
+     await box.put(query, jsonResponse['items']);
       }
     } catch (e) {
       print('Exception!!!!!!!!!!!!!!!!!!!!!!!!  ${e.toString()}');
