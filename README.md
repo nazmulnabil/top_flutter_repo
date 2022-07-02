@@ -6,13 +6,13 @@
 [Model:Holds backend logic,
  View:The user interface where all the visible views and animations are housed.
  This is the layer where users interacts with app like giving user input in this case.
- Viewmodel: It is the ui adapter/controller whic sits in between other two.
+ Viewmodel: It is the ui adapter/controller which sits in between other two.
  In our case bloc plays the role as viewmodel. 
 ]
 
 State Management System -> Bloc[Business logic component ...
 
-This is a flutter application where an user can search for popular github repositories...
+This is a flutter application where a user can search for popular github repositories...
 In case of 'Flutter' keyword The app will fetch top 50 flutter repositories
 [based on total star count]from github api.
 
@@ -35,7 +35,7 @@ When a user enters any input in the textfield it triggers the onTextChanged even
 The input is then recieved by use case from bloc which further sends the data to repository.
 The rpository then invokes and pass the input remote data source
 which is actually responsible for the http requests.Along with the given input it also sends some query parameter such as [sort,order,limit etc].
-The limit is set to 50,with the ascending order based on star count as sort parameter.So we can achieve the top 50 most starred flutter
+The limit is set to 50,with the descending order based on star count as sort parameter.So we can achieve the top 50 most starred flutter
 repositories with the given flutter keyword.
 
 After every succesfull api call we get the Json response....In this phase offline caching mechanism takes place.
