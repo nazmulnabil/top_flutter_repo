@@ -1,15 +1,7 @@
 # flutter_github_search
 
-
-### App architecture pattern -> MVVM [Model View ViewModel]
+### App architecture pattern -> Clean Architecture
  
-[Model:Holds backend logic,
- View:The user interface where all the visible views and animations are housed.
- This is the layer where users interacts with app like giving user input in this case.
- Viewmodel: It is the ui adapter/controller which sits in between other two.
- In our case bloc plays the role as viewmodel. 
-]
-
 State Management System -> Bloc[Business logic component ...
 
 This is a flutter application where a user can search for popular github repositories...
